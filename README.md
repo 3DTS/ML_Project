@@ -26,7 +26,7 @@ No. | Description
 ### Train the model
 1. Load files for training and test
     - The file containing the training data must contain "training" in the filename. Likewise, the file containing the test data must contain "test" in the filename.
-2. Choose number of epochs (Usually more epochs lead to better results. But be sure to not [overfit](https://www.geeksforgeeks.org/underfitting-and-overfitting-in-machine-learning/) the model!)
+2. Choose number of epochs (Usually more epochs lead to better results. But be sure not to [overfit](https://www.geeksforgeeks.org/underfitting-and-overfitting-in-machine-learning/) the model!)
 3. Hit "Start training"-button
 4. Depending on various factors such as the used hardware and the number of epochs the training my take a while.
 5. Pressing on "Evaluate" will test the model with the test-dataset, which is unknown to the model and the accuracy and loss will be printed to the console.
@@ -58,7 +58,7 @@ All methods of the `SVHN_GUI` class are marked with two underscores because they
 Only the `Console` class provides methods for use from outside. This class implements the ability to redirect standard output from the console to a text box. In order for the functions of `sys.stdout` to be 
 compatible with the `tkinter` widget, they must be redefined. So, if `sys.stdout.write` is called, the method from the `Console` class is called. This takes the content to be output and executes the `insert` method, 
 which displays the content on the text box. Similarly, the other methods work. The `flush` method serves as a dummy here, because TensorFlow uses this method and otherwise an `AttributeError` is thrown. 
-(Note: The class `Console` was taken from the Reddit user [`rdbende`]([https://www.reddit.com/r/Tkinter/comments/nmx0ir/how_to_show_terminal_output_in_gui/](https://www.reddit.com/r/Tkinter/comments/nmx0ir/comment/gzrq86t/?utm_source=share&utm_medium=web2x&context=3)https://www.reddit.com/r/Tkinter/comments/nmx0ir/comment/gzrq86t/?utm_source=share&utm_medium=web2x&context=3).)
+(Note: The class `Console` was taken from the Reddit user ["rdbende"]([https://www.reddit.com/r/Tkinter/comments/nmx0ir/how_to_show_terminal_output_in_gui/](https://www.reddit.com/r/Tkinter/comments/nmx0ir/comment/gzrq86t/?utm_source=share&utm_medium=web2x&context=3)https://www.reddit.com/r/Tkinter/comments/nmx0ir/comment/gzrq86t/?utm_source=share&utm_medium=web2x&context=3).)
 
 ### svhn_detection.py
 The class `SVHN_Detection` provides all the methods and procedures required for the training. It imports the class `ConvertFromMatFile` (see svhn_data.py) to load the record. Most of the methods here are accessible from the outside,
@@ -86,8 +86,8 @@ The `ConvertFromMatFile` class contains all the necessary methods for data prepa
 When the class is instantiated, this method is called directly and the data is stored in an internal variable. For further processing, image and label data can be extracted from it.
 
 ## Helpful Links
-[SVHN Dataset](http://ufldl.stanford.edu/housenumbers/)
+SVHN Dataset: http://ufldl.stanford.edu/housenumbers/
 
-[TensorFlow's tutorial on image classification](https://www.tensorflow.org/tutorials/images/classification)
+TensorFlow's tutorial on image classification: https://www.tensorflow.org/tutorials/images/classification
 
-[Over- and Underfitting](https://www.geeksforgeeks.org/underfitting-and-overfitting-in-machine-learning/)
+Over- and Underfitting: https://www.geeksforgeeks.org/underfitting-and-overfitting-in-machine-learning/
