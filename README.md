@@ -1,12 +1,12 @@
 # Machine Learning GUI for SVHN dataset
 GUI for training an ML-algorithm (TensorFlow) to classify digits of the SVHN-dataset. 
-Since the SVHN-dataset is in a .mat-format any other image dataset in this format could be used for training, but it is not tested yet.
-For this the .mat-file will be converted to a python dictionary with the image data labelled as "X" and labels as "y". Those names are hardcoded in svhn_data.py.
+Since the SVHN-dataset is in a .mat-format any other image dataset in this format could be used for training, but it is not tested.
+The .mat-file will be converted to a python dictionary with the image data labelled as "X" and labels as "y". Those names are hardcoded in svhn_data.py. Anything else should be handled by the program.
 
 ## Features
-- Training a machine learning algorithm locally using data from a MatLab's .mat-files
-- Save and load models
-- Evaluation of accuracy and loss in a graph for each epoch (This only works when the model was trained in the current session. **Loaded models won't provide that info!**)
+- Trains a machine learning algorithm locally using data from MatLab's .mat-files
+- Save and load models in SavedModel format
+- Evaluation of accuracy and loss in a graph for each epoch (This only works when the model was trained in the current session. Loaded models don't provide that info!)
 - (It *should* be independent of image dimensions. [**not tested!**])
 
 ## Start and usage
@@ -24,11 +24,11 @@ No. | Description
 **5**| Console window: This is where all the outputs of the program are displayed.
 
 ### Train the model
-1. Load files for training and test
+1. Load files for training and test (both can be selected simultaneously)
     - The file containing the training data must contain "training" in the filename. Likewise, the file containing the test data must contain "test" in the filename.
 2. Choose number of epochs (Usually more epochs lead to better results. But be sure not to [overfit](https://www.geeksforgeeks.org/underfitting-and-overfitting-in-machine-learning/) the model!)
 3. Hit "Start training"-button
-4. Depending on various factors such as the used hardware and the number of epochs the training my take a while.
+4. Depending on various factors such as the used hardware and the number of epochs the training may take a while.
 5. Pressing on "Evaluate" will test the model with the test-dataset, which is unknown to the model and the accuracy and loss will be printed to the console.
 6. Save the model by pressing "Save model".
 7. The button "Images" will evaluate the model (like in 5.) and show 25 random images with the predicted and true labels and the probability of that prediction.
@@ -58,14 +58,14 @@ All methods of the `SVHN_GUI` class are marked with two underscores because they
 Only the `Console` class provides methods for use from outside. This class implements the ability to redirect standard output from the console to a text box. In order for the functions of `sys.stdout` to be 
 compatible with the `tkinter` widget, they must be redefined. So, if `sys.stdout.write` is called, the method from the `Console` class is called. This takes the content to be output and executes the `insert` method, 
 which displays the content on the text box. Similarly, the other methods work. The `flush` method serves as a dummy here, because TensorFlow uses this method and otherwise an `AttributeError` is thrown. 
-(Note: The class `Console` was taken from the Reddit user ["rdbende"]([https://www.reddit.com/r/Tkinter/comments/nmx0ir/how_to_show_terminal_output_in_gui/](https://www.reddit.com/r/Tkinter/comments/nmx0ir/comment/gzrq86t/?utm_source=share&utm_medium=web2x&context=3)https://www.reddit.com/r/Tkinter/comments/nmx0ir/comment/gzrq86t/?utm_source=share&utm_medium=web2x&context=3).)
+(Note: The class `Console` was taken from the Reddit user ["rdbende"](https://www.reddit.com/r/Tkinter/comments/nmx0ir/comment/gzrq86t/?utm_source=share&utm_medium=web2x&context=3).)
 
 ### svhn_detection.py
-The class `SVHN_Detection` provides all the methods and procedures required for the training. It imports the class `ConvertFromMatFile` (see svhn_data.py) to load the record. Most of the methods here are accessible from the outside,
-as it is supposed to work like an API with other interfaces. They are primarily used to make settings and call TensorFlow functions. 
+The class `SVHN_Detection` provides all the methods and procedures required for the training. It imports the class `ConvertFromMatFile` (see svhn_data.py) to load the record. 
+Most of the methods here are accessible from the outside, as it is supposed to work like an API with other interfaces. They are primarily used to make settings and call TensorFlow functions. 
 The TensorFlow model has the following structure:
 
-```
+```python
 self.model = tf.keras.Sequential([
                   tf.keras.layers.RandomRotation(0.1, fill_mode="nearest", name="rand_rotation"),
                   tf.keras.layers.RandomZoom((-0.1,0.1), fill_mode="nearest", name="rand_zoom"),
@@ -89,5 +89,7 @@ When the class is instantiated, this method is called directly and the data is s
 SVHN Dataset: http://ufldl.stanford.edu/housenumbers/
 
 TensorFlow's tutorial on image classification: https://www.tensorflow.org/tutorials/images/classification
+
+TensorFlow layers: https://www.tensorflow.org/api_docs/python/tf/keras/layers
 
 Over- and Underfitting: https://www.geeksforgeeks.org/underfitting-and-overfitting-in-machine-learning/
