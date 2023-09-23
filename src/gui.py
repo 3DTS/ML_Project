@@ -45,6 +45,7 @@ class SVHN_GUI():
     version = "1.0"
     author = "Lucien Schneider"
     github_repo = "https://github.com/3DTS/ML_Project"
+    readme = "https://github.com/3DTS/ML_Project/blob/main/README.md"
     def __init__(self, window):
         """
         ### Parameters
@@ -191,7 +192,7 @@ class SVHN_GUI():
         self.menubar.add_cascade(label="File", menu=self.filemenu)
 
         self.helpmenu = tk.Menu(self.menubar, tearoff=0)
-        self.helpmenu.add_command(label="Help")
+        self.helpmenu.add_command(label="Help", command=self.__mbOpenHelp)
         self.helpmenu.add_command(label="About...", command=self.__menubarAbout)
         self.helpmenu.add_separator()
         self.helpmenu.add_command(label="Visit GitHub repo", command=self.__mbVisitGitHub)
@@ -345,6 +346,12 @@ class SVHN_GUI():
         """
         web_open(self.github_repo, new=0)
 
+    def __mbOpenHelp(self):
+        """ Method for "Help" menu option.
+        Opens README file of this project in browser.
+        """
+        web_open(self.readme, new=0)
+        
     def __showImageGrid(self):
         """ Shows 25 random images of prediction.
         Calls `predictModel` from class `SVHN_Detection` with `validation_images` as parameter.
